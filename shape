@@ -1,0 +1,75 @@
+import java.util.Scanner;
+
+
+class Shape {
+    private String name;
+    private String color;
+
+    public Shape(String name, String color) {
+        this.name = name;
+        this.color = color;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getColor() {
+        return color;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Введите количество фигур: ");
+        int n = scanner.nextInt();
+        scanner.nextLine();
+
+
+        Shape[] shapes = new Shape[n];
+
+
+        for (int i = 0; i < n; i++) {
+            System.out.println("Фигура №" + (i + 1));
+            System.out.print("Введите название: ");
+            String name = scanner.nextLine();
+
+            System.out.print("Введите цвет: ");
+            String color = scanner.nextLine();
+
+            shapes[i] = new Shape(name, color);
+        }
+
+        int whiteCount = 0;
+        int blackCount = 0;
+
+
+        for (Shape shape : shapes) {
+            if ("белый".equalsIgnoreCase(shape.getColor())) {
+                whiteCount++;
+            } else if ("черный".equalsIgnoreCase(shape.getColor())) {
+                blackCount++;
+            }
+        }
+
+
+        double whitePercent;
+        double blackPercent;
+
+        if (n > 0) {
+            whitePercent = ((double) whiteCount / n) * 100;
+            blackPercent = ((double) blackCount / n) * 100;
+        } else {
+            whitePercent = 0;
+            blackPercent = 0;
+        }
+
+        System.out.println("\nВсего фигур: " + n);
+        System.out.println("Белых фигур: " + whiteCount + " (" + whitePercent + "%)");
+        System.out.println("Черных фигур: " + blackCount + " (" + blackPercent + "%)");
+
+        scanner.close();
+    }
+}
